@@ -1,0 +1,123 @@
+/* Estilo base del body con imagen de fondo centrada y fija */
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url('pic/mesg.jpeg') center center / cover no-repeat fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* Contenedor principal del chat, columna flexible y centrado verticalmente */
+.chat-container {
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh; /* Limita altura para centrar mejor */
+  display: flex;
+  flex-direction: column;
+  background: rgba(255 255 255 / 0.15); /* Fondo transparente tipo agua */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque para transparencia */
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+/* Contenedor de mensajes con scroll y espacio entre mensajes,
+   centrado verticalmente con padding para separación */
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background: transparent;
+  justify-content: center; /* Centra verticalmente los mensajes si hay pocos */
+}
+
+/* Estilo para mensajes del usuario */
+.user {
+  align-self: flex-end;
+  background-color: #007aff;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 20px 20px 0 20px;
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: 0 2px 6px rgba(0, 122, 255, 0.4);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Estilo para mensajes del bot */
+.bot {
+  align-self: flex-start;
+  background-color: #e5e5ea;
+  color: #333;
+  padding: 12px 18px;
+  border-radius: 20px 20px 20px 0;
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Indicador de que el bot está escribiendo */
+.bot-typing {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
+
+/* Estilo del formulario de entrada */
+form {
+  display: flex;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid #ddd;
+  backdrop-filter: blur(5px);
+}
+
+/* Estilo del campo de texto */
+.message-input {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.message-input:focus {
+  border-color: #007aff;
+}
+
+/* Estilo del botón enviar */
+.send-button {
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  margin-left: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+/* Estado deshabilitado del botón enviar */
+.send-button:disabled {
+  background-color: #a0caff;
+  cursor: not-allowed;
+}
+
+/* Hover para botón enviar habilitado */
+.send-button:hover:not(:disabled) {
+  background-color: #005bb5;
+}

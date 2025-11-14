@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat de Asesoría Técnica</title>
+  <link rel="stylesheet" href="styles4.css" />
+</head>
+<body>
+  <div class="chat-container" role="region" aria-label="Chat de asesoría técnica">
+    <!-- Contenedor de mensajes -->
+    <div class="messages" id="messagesContainer" tabindex="0" aria-live="polite" aria-relevant="additions">
+      <!-- Mensaje inicial del bot -->
+      <div class="bot message">Hola, ¿en qué puedo ayudarte soy tu asesor de programación?</div>
+      <!-- Indicador de escritura del bot -->
+      <div class="bot-typing" id="botTyping" style="display:none;">Susy está escribiendo...</div>
+    </div>
+
+    <!-- Formulario para enviar mensajes -->
+    <form id="messageForm" autocomplete="off" class="message-form" aria-label="Enviar mensaje">
+      <input
+        type="text"
+        id="messageInput"
+        name="message"
+        placeholder="Escribe un mensaje..."
+        required
+        class="message-input"
+        aria-required="true"
+        aria-label="Campo para escribir mensaje"
+      />
+      <button type="submit" class="send-button" disabled aria-label="Enviar mensaje">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+    // Obtener elementos del DOM
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.querySelector('.send-button');
+    const messagesContainer = document.getElementById('messagesContainer');
+    const botTyping = document.getElementById('botTyping');
+
+    // Habilita o deshabilita el botón enviar según si hay texto
+    function toggleSendButton() {
+      sendButton.disabled = !messageInput.value.trim();
+    }
+
+    // Escuchar entrada de texto para activar botón enviar
+    messageInput.addEventListener('input', toggleSendButton);
+
+    // Manejar el envío del formulario
+    document.getElementById('messageForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = messageInput.value.trim();
+      if (!text) return; // No enviar mensajes vacíos
+
+      // Crear y agregar mensaje del usuario
+      const userMsg = document.createElement('div');
+      userMsg.className = 'user message';
+      userMsg.textContent = text;
+      messagesContainer.appendChild(userMsg);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // Limpiar campo y desactivar botón enviar
+      messageInput.value = '';
+      toggleSendButton();
+
+      // Mostrar indicador de escritura del bot
+      botTyping.style.display = 'block';
+
+      // Simular respuesta del bot tras 1.5 segundos
+      setTimeout(() => {
+        botTyping.style.display = 'none';
+        const botReply = document.createElement('div');
+        botReply.className = 'bot message';
+        botReply.textContent = 'Gracias por tu mensaje. Un experto te responderá pronto.';
+        messagesContainer.appendChild(botReply);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
